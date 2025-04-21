@@ -83,11 +83,7 @@ Julia Smith (me)
 
 ## Next Steps
 
-- Load more recipes into the CSV (now over 90!)
-- Add new filters for “diet”, “flavor”, and “protein”
-- Add a "liked recipes" section
-- Add a "submit recipe request" section
-- Improve styling for desktop and mobile (color scheme, readability)
+- Add a rating system for each recipe - would show up in a .csv file (using stars?)
 
 ---
 
