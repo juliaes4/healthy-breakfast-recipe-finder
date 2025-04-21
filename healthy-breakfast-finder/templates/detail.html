@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<nav>
+    <a href="/">home</a>
+    <a href="/suggest">suggest a recipe</a>
+    <a href="/submissions">view submissions</a>
+</nav>
+
+</nav>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; background-color: #e5e7be; padding: 2rem; }
+        .container { max-width: 750px; margin: auto; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background: #efe4dc; }
+        h1 { color: #cb7287; }
+        p { line-height: 1.6; }
+        a { text-decoration: none; color: #cb7287; }
+       
+        nav {
+            background-color: #fff0f6;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #b56576;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+                a {
+            text-decoration: none;
+            color: #b56576;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>{{ name }}</h1>
+        <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+        <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+        <p><strong>Calories:</strong> {{ recipe.calories }} kcal</p>
+        <p><strong>Protein:</strong> {{ recipe.protein }} g</p>
+        <p><strong>Diet:</strong> {{ recipe.diet }}</p>
+        <p><strong>Flavor:</strong> {{ recipe.flavor }}</p>
+        <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+        <a href="/">← Back to Search</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>recipe suggestions</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            padding: 2rem;
+            background: #ffe7e7;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #fff0f6;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #b56576;
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            color: #cb7287;
+            margin-bottom: 2rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        li {
+            background: #fff0f6;
+            border: 1px solid #ddd;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        li strong {
+            color: #cb7287;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            color: #b56576;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-bottom: 2px solid #b56576;
+            padding-bottom: 2px;
+        }
+
+        .back-link:hover {
+            color: #a14b5e;
+            border-color: #a14b5e;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">home</a>
+        <a href="/suggest">suggest a recipe</a>
+        <a href="/submissions">view submissions</a>
+    </nav>
+
+    <h1>recipe suggestions</h1>
+
+    {% if suggestions %}
+        <ul>
+            {% for item in suggestions %}
+                <li><strong>{{ item.name|lower }}:</strong> {{ item.suggestion }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No suggestions yet. Be the first to share one!</p>
+    {% endif %}
+
+    <a href="/" class="back-link">← back to home</a>
+
+</body>
+</html>
+

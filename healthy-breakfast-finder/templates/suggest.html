@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suggest a Recipe</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #e5e7be;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #fff0f6;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #b56576;
+            font-size: 1.1rem;
+        }
+
+        form {
+            background: #ffffff;
+            display: inline-block;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #ddd;
+            text-align: left;
+            font-size: 1.1rem;
+            width: 400px;       
+            max-width: 90%;
+        }
+
+
+        h2 {
+            text-align: center;
+            color: #cb7287;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #aaa;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            background: #f5a8c2;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e68bac;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">home</a>
+        <a href="/suggest">suggest a recipe</a>
+        <a href="/submissions">view submissions</a>
+    </nav>
+
+    <form method="POST">
+        <h2>suggest a recipe</h2>
+        <label for="name">your name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="suggestion">recipe idea:</label>
+        <textarea id="suggestion" name="suggestion" rows="4" required></textarea>
+
+        <button type="submit">submit</button>
+    </form>
+
+</body>
+</html>
