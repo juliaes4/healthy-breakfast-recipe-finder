@@ -75,12 +75,16 @@
         strong {
             color: #cb7287;
         }
-        
-                .recipe-link {
+
+        .recipe-link {
             text-decoration: none;
             color: #b56576;
         }
 
+        .rating {
+            margin-left: 1rem;
+            color: #b56576;
+        }
     </style>
 </head>
 <body>
@@ -105,12 +109,14 @@
             <li>
                 <strong>
                     <a href="/recipe/{{ name|urlencode }}" class="recipe-link">{{ name }}</a>
-                  </strong><br>
-                  <p>Ingredients: {{ info.ingredients }}</p>
-                  <p>Calories: {{ info.calories }} kcal</p>
-                  <p>Protein: {{ info.protein }} g</p>
-                  <p>Diet: {{ info.diet | capitalize }}</p>
-                  
+                </strong><br>
+                <p>Ingredients: {{ info.ingredients }}</p>
+                <p>Calories: {{ info.calories }} kcal</p>
+                <p>Protein: {{ info.protein }} g</p>
+                <p>Diet: {{ info.diet | capitalize }}</p>
+                {% if info.average_rating %}
+                    <p class="rating">⭐ average rating: {{ info.average_rating }} / 5</p>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -119,4 +125,3 @@
     {% endif %}
 
 </body>
-</html>
