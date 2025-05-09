@@ -21,7 +21,6 @@ def load_recipes():
                     "instructions": row["instructions"]
                 }
 
-                
     except Exception as e:
         print(f"Error loading CSV: {e}")
     return recipes
@@ -34,6 +33,22 @@ def home():
     if request.method == "POST":
         query = request.form["query"].lower()
         results = search_recipe(query)
+
+        # Add average ratings
+        for name in results:
+            ratings = []
+            try:
+                with open("ratings.csv", newline='', encoding="utf-8") as file:
+                    reader = csv.reader(file)
+                    next(reader, None)
+                    for row in reader:
+                        if row[0] == name:
+                            ratings.append(int(row[1]))
+            except:
+                pass
+            avg = round(sum(ratings) / len(ratings), 2) if ratings else None
+            results[name]["average_rating"] = avg
+
     return render_template("index.html", recipes=results)
 
 def search_recipe(query):
@@ -47,16 +62,42 @@ def search_recipe(query):
             matches[name] = data
     return matches
 
-@app.route("/recipe/<recipe_name>")
+@app.route("/recipe/<recipe_name>", methods=["GET", "POST"])
 def recipe_detail(recipe_name):
-    # Convert recipe_name back to readable format
     recipe_name = recipe_name.replace("%20", " ")
 
-    if recipe_name in recipes:
-        recipe = recipes[recipe_name]
-        return render_template("detail.html", name=recipe_name, recipe=recipe)
-    else:
+    if recipe_name not in recipes:
         return "Recipe not found", 404
+
+    # Handle new rating submission
+    if request.method == "POST":
+        rating = request.form.get("rating")
+        if rating:
+            try:
+                with open("ratings.csv", mode="a", newline="", encoding="utf-8") as file:
+                    writer = csv.writer(file)
+                    writer.writerow([recipe_name, rating])
+            except Exception as e:
+                print(f"Error saving rating: {e}")
+
+    # Calculate average rating
+    ratings = []
+    try:
+        with open("ratings.csv", newline='', encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader, None)  # skip header if present
+            for row in reader:
+                if row[0] == recipe_name:
+                    ratings.append(int(row[1]))
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        print(f"Error loading ratings: {e}")
+
+    average_rating = round(sum(ratings) / len(ratings), 2) if ratings else None
+
+    recipe = recipes[recipe_name]
+    return render_template("detail.html", name=recipe_name, recipe=recipe, average_rating=average_rating)
 
 @app.route("/suggest", methods=["GET", "POST"])
 def suggest_recipe():
@@ -83,12 +124,6 @@ def view_suggestions():
 
     return render_template("submissions.html", suggestions=suggestions)
 
-
-
 if __name__ == "__main__":
     print("Flask is launching...")
     app.run(debug=True, port=5001)
-
-
-
-
